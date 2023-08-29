@@ -18,6 +18,8 @@ data:
             fastcgi_pass php-service:9000;
             fastcgi_index index.php;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            #fixes timeouts
+            fastcgi_read_timeout 600;
             include        fastcgi_params;
         }
 
@@ -33,6 +35,36 @@ data:
             add_header Cache-Control public;
         }
     }
+
+{{- if .Values.docs.enabled }}
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: docs-config
+data:
+  config: |
+    server {
+        listen       80;
+        server_name  {{ .Values.host }};
+        root   /app;
+        index  index.php index.html;
+
+        location ~ .*\.(gif|jpg|jpeg|png|bmp)$ {
+            expires 30d;
+            access_log off;
+            add_header Cache-Control public;
+        }
+
+        location ~ .*\.(js|css)?$ {
+            expires 1d;
+            access_log off;
+            add_header Cache-Control public;
+        }
+    }
+
+{{- end }}
 
 {{- if .Values.oss.enabled }}
 ---

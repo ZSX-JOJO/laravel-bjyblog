@@ -172,7 +172,7 @@
                     <dd>{{ translate('Contact Email') }}：<a href="mailto:{!! config('bjyblog.admin_email') !!}">{!! config('bjyblog.admin_email') !!}</a></dd>
                 @endif
                 @if(!empty(config('bjyblog.icp')) && config('app.locale') === 'zh-CN')
-                    <dd>{{ translate('ICP') }}：<a rel="nofollow" href="http://www.beian.miit.gov.cn" target="{{ config('bjyblog.link_target') }}">{{ config('bjyblog.icp') }}</a></dd>
+                    <dd>{{ translate('ICP') }}：<a rel="nofollow" href="https://beian.miit.gov.cn" target="{{ config('bjyblog.link_target') }}">{{ config('bjyblog.icp') }}</a></dd>
                 @endif
             </dl>
 
@@ -238,6 +238,7 @@
     ajaxLikeUrl = "{{ url('likes/store') }}";
     ajaxUnLikeUrl = "{{ url('likes/destroy') }}";
     ajaxLogoutUrl = "{{ url('auth/socialite/logout') }}";
+    ajaxSiteUrl = "{{ url('sites') }}";
     socialiteUserShowUrl = "{{ url('socialiteUsers/me') }}";
     titleName = '{{ config('app.name') }}';
     jsSocialsConfig = {!! config('bjyblog.social_share.jssocials_config') !!};

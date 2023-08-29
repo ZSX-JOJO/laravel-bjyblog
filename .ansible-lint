@@ -1,4 +1,0 @@
-warn_list:
-  - command-instead-of-shell
-  - experimental
-  - no-changed-when
